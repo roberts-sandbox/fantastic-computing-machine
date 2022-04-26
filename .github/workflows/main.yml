@@ -16,8 +16,10 @@ jobs:
     steps:
       - name: Payload
         run: |
+          echo "name: ${{ github.event_name }}"
+          echo "issue num: ${{ github.event.issue.number }}"
+          echo "PR num: ${{ github.event.pull_request.number }}"
           cat $GITHUB_EVENT_PATH
-          echo ${{ github.event.issue.number }}
       
   i-comment:
     if: ${{ (github.event.label.name == 'my label' && github.event_name == 'issues' || github.event_name == 'pull_request_target') }}
