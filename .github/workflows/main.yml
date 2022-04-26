@@ -11,6 +11,14 @@ permissions:
   pull-requests: write
 
 jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Payload
+        run: |
+          echo $GITHUB_EVENT_PATH
+          echo ${{ github.event }}
+      
   i-comment:
     if: ${{ (github.event.label.name == 'my label' && github.event_name == 'issues' || github.event_name == 'pull_request_target') }}
     runs-on: ubuntu-latest
