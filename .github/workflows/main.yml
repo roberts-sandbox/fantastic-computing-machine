@@ -22,7 +22,7 @@ jobs:
           cat $GITHUB_EVENT_PATH
       
   i-comment:
-    if: ${{ (github.event.label.name == 'my label' && github.event_name == 'issues' || github.event_name == 'pull_request_target') }}
+    if: ${{ (github.event.label.name == 'my label' && github.event_name == 'issues' }}
     runs-on: ubuntu-latest
     steps:
       - uses: peter-evans/create-or-update-comment@v2
