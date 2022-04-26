@@ -1,0 +1,31 @@
+name: test
+
+on:
+  issues:
+    types: [labeled]
+  pull_request_target:
+    types: [labeled]
+
+permissions:
+  issues: write
+  pull-requests: write
+
+jobs:
+  i-comment:
+    if: ${{ (github.event.label.name == 'my label' && github.event_name == 'issues' || github.event_name == 'pull_request_target') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            My issue comment
+  p-comment:
+    if: ${{ github.event.label.name == 'my label' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: peter-evans/create-or-update-comment@v2
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            My pr comment
