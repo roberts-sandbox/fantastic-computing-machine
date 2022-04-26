@@ -16,6 +16,7 @@ jobs:
     steps:
       - name: Payload
         run: |
+          echo "number: ${{ github.event.number }}"
           echo "name: ${{ github.event_name }}"
           echo "issue num: ${{ github.event.issue.number }}"
           echo "PR num: ${{ github.event.pull_request.number }}"
